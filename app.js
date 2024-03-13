@@ -3,13 +3,13 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+const cors = require("cors");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var add_new = require("./routes/Addnew");
 
 var app = express();
-
+app.use(cors());
 app.set("trust proxy", 1); // trust first proxy
 
 const mongoose = require("mongoose");
