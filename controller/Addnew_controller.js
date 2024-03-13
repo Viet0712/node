@@ -1,10 +1,21 @@
+const { abort } = require("process");
+
 class AddNew_controller {
   add_new(req, res) {
-    res.render("form", { a: true });
+    var status = req.query.status;
+    var id = req.query.id;
+    res.render("form", { status, id });
   }
 
-  add_newPost(req, res) {
+  async add_newPost(req, res) {
     const path = require("path");
+    const Product_model = require("../models/product_models.js");
+    var data = await Product_model.findById(req.body._id);
+    if (data) {
+      res.redirect("/add_new/?status=dup");
+      return;
+    }
+
     const multer = require("multer");
 
     var storage = multer.diskStorage({
@@ -19,6 +30,12 @@ class AddNew_controller {
     const upload = multer({ storage: storage });
 
     upload.single("image")(req, res, async function (err) {
+      const Product_model = require("../models/product_models.js");
+      var data = await Product_model.findById(req.body._id);
+      if (data) {
+        res.redirect("/add_new/?status=dup&id=" + req.body._id);
+        return;
+      }
       //   console.log(req.file);
 
       //   console.log(req.body._id);

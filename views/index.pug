@@ -11,7 +11,8 @@ block content
         |Cập Nhật Thành Công
     else if  status  =="delete"
       h1.information
-        |Xóa Thành Công  
+        |Xóa Thành Công
+
     br
     br
     .menu
@@ -93,7 +94,7 @@ block content
       var search = document.getElementById("search").value;
       document.getElementById("dataResult").innerHTML = ""
 
-      axios.get(("https://node-1-pmiy.onrender.com/search?search=")+search).then(response=>{
+      axios.get(("http://localhost:3000/search?search=")+search).then(response=>{
         console.log(response.data)
         response.data.forEach(element=>{
           console.log(element)
