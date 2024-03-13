@@ -16,8 +16,9 @@ block content
             .col-md-4(style='border: thin solid salmon; padding: 10px; margin: 10px;')
                 form.input_fomr_data(method='post' onsubmit="return ok()" enctype="multipart/form-data" action="/add_new/addnewpost")
                     .form-group
-                        label(for='id_product') Mã Sản Phẩm
-                        input#id_product.form-control(type='text' name='_id' onchange="checkID()")
+                        label(for='id_product') Mã Sản Phẩm 
+                        span#checkId.err  
+                        input#id_product.form-control(type='text' name='_id' required oninput="checkID()")
                     .form-group
                         label(for='name_product') Tên Sản Phẩm
                         input#name_product.form-control(type='text' maxlength='33' name='product_name')
@@ -51,10 +52,23 @@ block content
         }
         function checkID (){
             var id = document.getElementById("id_product").value;
-            if(id!==""){
 
-                return true;
-            }
+            $.ajax({
+                type: 'GET',
+                url: "/CheckID",
+                data: {
+                    id:id,
+                },
+                success: function(data) {
+
+                    if(data=="false"){
+                        document.getElementById("checkId").innerHTML=""
+                    }
+                    else{
+                        document.getElementById("checkId").innerHTML="Trùng ID!!"
+                    }
+                }
+            })
         }
         function checkImage() {
             var fileInput = document.getElementById('image');

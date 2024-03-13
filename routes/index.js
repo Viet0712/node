@@ -8,6 +8,7 @@ router.post("/updatepost", index_controller.update_post);
 router.get("/update", index_controller.update_form);
 router.get("/delete", index_controller.delete);
 router.get("/search", index_controller.search);
+router.get("/CheckID", index_controller.CheckID);
 router.get("/", async (req, res, next) => {
   var status = req.query.status;
   const Product_model = require("../models/product_models");
