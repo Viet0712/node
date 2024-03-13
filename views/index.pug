@@ -70,22 +70,22 @@ block content
             th Ảnh
             th Hành Động
         tbody#dataResult
-          //- each product in AllProduct
-          //-   tr 
-          //-     td #{product._id}
-          //-     td #{product.product_name}
-          //-     td #{product.quantity}
-          //-     td #{product.price}
-          //-     td #{product.description}
-          //-     td 
-          //-       img.avata(src=`/uploads/${product.image}` alt="")
-          //-     td 
-          //-       a(href=`/update?product_id=${product._id}`)
-          //-         button.btn.btn-primary
-          //-           |Chỉnh Sửa
-          //-       a(href=`/delete?product_id=${product._id}` )
-          //-         button.btn.btn-danger
-          //-           | Xóa   
+          each product in AllProduct
+            tr 
+              td #{product._id}
+              td #{product.product_name}
+              td #{product.quantity}
+              td #{product.price}
+              td #{product.description}
+              td 
+                img.avata(src=`/uploads/${product.image}` alt="")
+              td 
+                a(href=`/update?product_id=${product._id}`)
+                  button.btn.btn-primary
+                    |Chỉnh Sửa
+                a(href=`/delete?product_id=${product._id}` )
+                  button.btn.btn-danger
+                    | Xóa   
     h5#volum.volum
     ul#number.pagination.justify-content-end.w-100
   script. 
@@ -119,7 +119,7 @@ block content
         )
       })
     }
-    search()  
+    //- search()  
 
 
 
