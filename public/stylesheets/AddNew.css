@@ -1,0 +1,96 @@
+.err {
+    padding-left: 2px;
+    color: red;
+    font-style: italic;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 97%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.form-group {
+    margin: 1rem 0;
+}
+
+.district {
+    margin: 0 3rem;
+    width: 30%
+}
+
+label {
+    font-size: 0.9rem;
+}
+
+.checkbox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+.checkbox-element span {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.checkbox-element input {
+    width: 0.9rem;
+    height: 0.9rem;
+    ;
+}
+
+.radio-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+
+}
+
+.radio-form div {
+    margin-top: 0.4rem;
+}
+
+.radio-form span {
+    margin-left: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.radio-form input {
+    width: 1.1rem;
+    height: 1.1rem;
+    ;
+}
+
+.title {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+form .form-group{
+width: 100% !important;
+}
+
+#map {
+    width: 90%;
+    height: 70vh;
+
+}
+#volum {
+    color: brown;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+.button{
+    width: 100%;
+    
+}
+.button input{
+    margin-right: 5%;
+}

@@ -1,0 +1,83 @@
+extends layoutAdd_new
+
+block content
+    body
+        h2 
+            |Thêm Sản Phẩm
+            hr
+        a(href="/")
+            button.btn.btn-danger
+                |Quay Lại
+        br
+        .row
+            .col-md-4(style='border: thin solid salmon; padding: 10px; margin: 10px;')
+                form.input_fomr_data(method='post' onsubmit="return ok()" enctype="multipart/form-data" action="/add_new/addnewpost")
+                    .form-group
+                        label(for='id_product') Mã Sản Phẩm
+                        input#id_product.form-control(type='text' name='_id' onchange="checkID()")
+                    .form-group
+                        label(for='name_product') Tên Sản Phẩm
+                        input#name_product.form-control(type='text' maxlength='33' name='product_name')
+                    .form-group
+                        label(for='') Số Lượng
+                        input#quantity.form-control(type='number' name='quantity')
+                    .form-group
+                        label(for='') Giá
+                        input#price.form-control(type='number' name='price')    
+                    .form-group
+                        label(for='') Ảnh Bìa
+                        span#kqImageSize.err
+                        span#kqImageType.err
+                        input#image.form-control(oninput='checkImage()' type='file' data-index='image' name='image')
+                    .form-group
+                        label(for='') Mô Tả
+                        input#description.form-control(type='text' name='description' )
+
+                    .button
+
+                        input.btn.btn-danger(type='submit' value='Xác Nhận' name='btnOK')
+                        input.btn.btn-info(type='reset' value='Xóa')
+    script.   
+        function ok (){
+
+            if(checkID() && checkImage() ){
+                console.log("hehe") ;
+                return true;
+            }
+                return false;
+        }
+        function checkID (){
+            var id = document.getElementById("id_product").value;
+            if(id!==""){
+
+                return true;
+            }
+        }
+        function checkImage() {
+            var fileInput = document.getElementById('image');
+            var checkImageSize = document.getElementById("kqImageSize");
+            var checkImageType = document.getElementById("kqImageType");
+            var imageFile = fileInput.files[0];
+            var allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+            if (imageFile.size / (1024 * 1024) > 3 && allowedTypes.includes(imageFile.type)) {
+                checkImageType.innerHTML = "";
+                checkImageSize.innerHTML = " Vượt quá 3mb";
+                return false;
+            }
+            if (imageFile.size / (1024 * 1024) > 3 && !allowedTypes.includes(imageFile.type)) {
+                checkImageType.innerHTML = "Chỉ nhận file có đuôi jpg, png, jpeg";
+                checkImageSize.innerHTML = " Vượt quá 3mb";
+                return false;
+            }
+            if (imageFile.size / (1024 * 1024) < 3) {
+                checkImageSize.innerHTML = "";
+                if (!allowedTypes.includes(imageFile.type)) {
+                    checkImageType.innerHTML = "Chỉ nhận file có đuôi jpg, png, jpeg";
+                    return false;
+                } else {
+                    checkImageType.innerHTML = "";
+                    return true;
+                }
+            }
+            return true;
+        }

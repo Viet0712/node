@@ -1,0 +1,126 @@
+extends layout
+
+block content
+
+  body
+    if status =="add"
+      h1.information
+        |Thêm Thành Công
+    else if   status  =="update"
+      h1.information
+        |Cập Nhật Thành Công
+    else if  status  =="delete"
+      h1.information
+        |Xóa Thành Công  
+    br
+    br
+    .menu
+      h3 Danh Sách Sản Phẩm
+    br
+    a(href="/add_new" id="create_product")
+      button.btn.btn-danger
+        | Thêm Sản Phẩm
+    br
+    br
+    .search
+      .form-group
+        label(for=) Tìm Sản Phẩm:
+        span
+        br
+        input#search(type="text" name="search" oninput="search()")
+      //- .form-group
+        label(for=) Ngày Hoạt Động:
+        span#Checkday.err
+        br
+        .checkbox
+          .checkbox-element
+            input#monday.DOW(type="checkbox" onchange="searchidbv()" name="monday" value="T2")
+            span Thứ 2
+          .checkbox-element
+            input#tuesday.DOW(type="checkbox" onchange="searchidbv()" name="tuesday" value="T3")
+            span Thứ 3
+          .checkbox-element
+            input#wednesday.DOW(type="checkbox" onchange="searchidbv()" name="wednesday" value="T4")
+            span Thứ 4
+          .checkbox-element
+            input#thursday.DOW(type="checkbox" onchange="searchidbv()" name="thursday" value="T5")
+            span Thứ 5
+          .checkbox-element
+            input#friday.DOW(type="checkbox" onchange="searchidbv()" name="friday" value="T6")
+            span Thứ 6
+          .checkbox-element
+            input#saturday.DOW(type="checkbox" onchange="searchidbv()" name="saturday" value="T7")
+            span Thứ 7
+          .checkbox-element
+            input#sunday.DOW(type="checkbox" onchange="searchidbv()" name="sunday" value="CN")
+            span Chủ Nhật
+
+          .checkbox-element
+            input#all.DOW(type="checkbox" name="all" onchange="searchidbv()" value="T2, T3, T4, T5, T6, T7, CN")
+            span Cả Tuần
+    .table-height
+      table.table.table-hover.table-striped
+        thead
+          tr
+            th Mã Sản Phẩm
+            th Tên Sản Phẩm
+            th Số Lượng
+            th Giá
+            th Mô Tả
+            th Ảnh
+            th Hành Động
+        tbody#dataResult
+          //- each product in AllProduct
+          //-   tr 
+          //-     td #{product._id}
+          //-     td #{product.product_name}
+          //-     td #{product.quantity}
+          //-     td #{product.price}
+          //-     td #{product.description}
+          //-     td 
+          //-       img.avata(src=`/uploads/${product.image}` alt="")
+          //-     td 
+          //-       a(href=`/update?product_id=${product._id}`)
+          //-         button.btn.btn-primary
+          //-           |Chỉnh Sửa
+          //-       a(href=`/delete?product_id=${product._id}` )
+          //-         button.btn.btn-danger
+          //-           | Xóa   
+    h5#volum.volum
+    ul#number.pagination.justify-content-end.w-100
+  script. 
+    function search(){
+      var search = document.getElementById("search").value;
+      document.getElementById("dataResult").innerHTML = ""
+
+      axios.get(("http://localhost:3000/search?search=")+search).then(response=>{
+        console.log(response.data)
+        response.data.forEach(element=>{
+          console.log(element)
+          $("#dataResult").append(
+            `<tr> 
+              <td>${element._id}</td>
+              <td>${element.product_name}</td>
+              <td>${element.quantity}</td>
+              <td>${element.price}</td>
+              <td>${element.description}</td>
+              <td>
+                <img class="avata" src="/uploads/${element.image}" alt="">
+              </td>
+              <td>
+                <a href="/update?product_id=${element._id}"><button class='btn btn-primary'>Cập Nhật</button></a>
+                <a href="/delete?product_id=${element._id}"><button class='btn btn-danger'>Xóa</button></a>
+              </td>
+            </tr>
+            `
+          )
+        }
+
+        )
+      })
+    }
+    search()  
+
+
+
+
