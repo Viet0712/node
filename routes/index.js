@@ -11,6 +11,7 @@ router.get("/search", index_controller.search);
 router.get("/CheckID", index_controller.CheckID);
 router.get("/", async (req, res, next) => {
   var status = req.query.status;
+
   const Product_model = require("../models/product_models");
   var AllProduct = await Product_model.find({});
 

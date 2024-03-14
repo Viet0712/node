@@ -41,10 +41,11 @@ block content
 
                         input.btn.btn-danger(type='submit' value='Xác Nhận' name='btnOK')
                         input.btn.btn-info(type='reset' value='Xóa')
-    script.   
+    script. 
+        var checkid=""   
         function ok (){
 
-            if(checkID() && checkImage() ){
+            if(checkid=="false" && checkImage() ){
                 console.log("hehe") ;
                 return true;
             }
@@ -60,14 +61,14 @@ block content
                     id:id,
                 },
                 success: function(data) {
-
+                    console.log(data)
+                    checkid = data
                     if(data=="false"){
                         document.getElementById("checkId").innerHTML="";
-                        return true;
                     }
                     else{
                         document.getElementById("checkId").innerHTML="Trùng ID!!"
-                        return false;
+
                     }
                 }
             })
@@ -95,6 +96,7 @@ block content
                     return false;
                 } else {
                     checkImageType.innerHTML = "";
+                    console.log("checkimage")
                     return true;
                 }
             }

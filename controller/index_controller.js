@@ -69,11 +69,10 @@ class index_controller {
   async CheckID(req, res) {
     const Product_model = require("../models/product_models.js");
     var id = await Product_model.findById(req.query.id);
-
     if (id) {
-      res.send("true");
+      res.json("true");
     } else {
-      res.send("false");
+      res.json("false");
     }
   }
 }
